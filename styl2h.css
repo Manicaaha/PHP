@@ -19,10 +19,12 @@ html{
     height: 250px;
     padding: 30px;
     text-align: center;
+    clear: both;
 }
 .stopka{
     background-color: #188256;
     height: 150px;
+    clear: both;
     padding: 10px;
 }
 a:link{

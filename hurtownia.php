@@ -13,14 +13,14 @@
     <div class="lista">
         <h2>Podzespoły</h2>
         <?php
-        $lacz = mysqli_connect('localhost','root','','sklep');
+        $lacz = mysqli_connect('localhost','root','','baza');
         $pyt = "SELECT `kategoria` FROM `typy`;";
         $wyn = mysqli_query($lacz, $pyt);
-        echo "<ul>";
+        echo "<ol>";
         while($row = mysqli_fetch_array($wyn)){
             echo "<li>".$row[0]."</li>";
         }
-        echo "</ul>";
+        echo "</ol>";
         mysqli_close($lacz)
         ?>
     </div>
@@ -28,10 +28,10 @@
         <h2>Hurtownia komputerowa</h2>
         <form action="hurtownia.php" method="post">
             Wybierz kategorię sprzętu
-            <input type="number">
+            <input type="number" name="num">
             <input type="submit" value="SPRAWDŹ">
             <?php
-            $lacz = mysqli_connect('localhost','root','','sklep');
+            $lacz = mysqli_connect('localhost','root','','baza');
             $pyt = "SELECT podzespoly.`nazwa`,podzespoly.`opis`,podzespoly.`cena` FROM `podzespoly` join typy on podzespoly.typy_id=typy.id WHERE typy.id = 1;";
             $wyn = mysqli_query($lacz, $pyt);
             echo "<ul>";
@@ -44,8 +44,16 @@
         </form>
     </div>
     <div class="glowny">
-        <H1>Podzespoły we wskazanej kategorii</H1>
+        <h1>Podzespoły we wskazanej kategorii</h1>
         <?php
+        $lacz = mysqli_connect('localhost','root','','baza');
+        $wy = $_POST['num'];
+        $pyt = "SELECT podzespoly.nazwa FROM `typy`join podzespoly on typy.id = podzespoly.typy_id WHERE podzespoly.typy_id = '$wy';";
+        $wyn = mysqli_query($lacz, $pyt);
+        while($row = mysqli_fetch_array($wyn)){
+            echo $row[0]."<br>";
+        }
+        mysqli_close($lacz)
         ?>
     </div>
     <div class="stopka">
